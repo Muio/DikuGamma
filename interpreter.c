@@ -8,6 +8,9 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdio.h>
+#define _XOPEN_SOURCE
+#include <unistd.h>
+char* crypt(char*, char*);
 #include "structs.h"
 #include "comm.h"
 #include "interpreter.h"
@@ -1105,7 +1108,8 @@ void nanny(struct descriptor_data *d, char *arg)
 			   close_socket(d);
 			else
 			{
-				if (strncmp(crypt(arg, d->pwd), d->pwd, 10))
+			  char* encrypted = crypt(arg, d->pwd);
+			  if (strncmp(encrypted, d->pwd, 10))
 				{
 					SEND_TO_Q("Wrong password.\n\r", d);
 					SEND_TO_Q("Password: ", d);
