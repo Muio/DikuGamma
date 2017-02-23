@@ -190,7 +190,7 @@ void affect_modify(struct char_data *ch, byte loc, byte mod, long bitv, bool add
 			break;
 
 		default:
-			log("Unknown apply adjust attempt (handler.c, affect_modify).");
+			dm_log("Unknown apply adjust attempt (handler.c, affect_modify).");
 			break;
 
 	} /* switch */
@@ -296,7 +296,7 @@ void affect_remove( struct char_data *ch, struct affected_type *af )
 		for(hjp = ch->affected; (hjp->next) && (hjp->next != af); hjp = hjp->next);
 
 		if (hjp->next != af) {
-			log("FATAL : Could not locate affected_type in ch->affected. (handler.c, affect_remove)");
+			dm_log("FATAL : Could not locate affected_type in ch->affected. (handler.c, affect_remove)");
 			exit(1);
 		}
 		hjp->next = af->next; /* skip the af element */
@@ -369,7 +369,7 @@ void char_from_room(struct char_data *ch)
 	struct char_data *i;
 
 	if (ch->in_room == NOWHERE) {
-		log("NOWHERE extracting char from room (handler.c, char_from_room)");
+		dm_log("NOWHERE extracting char from room (handler.c, char_from_room)");
 		exit(1);
 	}
 
@@ -485,12 +485,12 @@ void equip_char(struct char_data *ch, struct obj_data *obj, int pos)
 	assert(!(ch->equipment[pos]));
 
 	if (obj->carried_by) {
-		log("EQUIP: Obj is carried_by when equip.");
+		dm_log("EQUIP: Obj is carried_by when equip.");
 		return;
 	}
 
 	if (obj->in_room!=NOWHERE) {
-		log("EQUIP: Obj is in_room when equip.");
+		dm_log("EQUIP: Obj is in_room when equip.");
 		return;
 	}
 
@@ -504,7 +504,7 @@ void equip_char(struct char_data *ch, struct obj_data *obj, int pos)
 			obj_to_room(obj, ch->in_room);
 			return;
 		} else {
-			log("ch->in_room = NOWHERE when equipping char.");
+			dm_log("ch->in_room = NOWHERE when equipping char.");
 		}
 	}
 
@@ -916,7 +916,7 @@ void extract_char(struct char_data *ch)
 	}
 
 	if (ch->in_room == NOWHERE) {
-		log("NOWHERE extracting char. (handler.c, extract_char)");
+		dm_log("NOWHERE extracting char. (handler.c, extract_char)");
 		exit(1);
 	}
 
@@ -994,7 +994,7 @@ void extract_char(struct char_data *ch)
 		if(k)
 			k->next = ch->next;
 		else {
-			log("Trying to remove ?? from character_list. (handler.c, extract_char)");
+			dm_log("Trying to remove ?? from character_list. (handler.c, extract_char)");
 			abort();
 		}
 	}
@@ -1154,11 +1154,11 @@ struct obj_data *create_money( int amount )
 	struct extra_descr_data *new_descr;
 	char buf[80];
 
-	char *strdup(char *str);
+	/*char *strdup(char *str); */
 
 	if(amount<=0)
 	{
-		log("ERROR: Try to create negative money.");
+		dm_log("ERROR: Try to create negative money.");
 		exit(1);
 	}
 

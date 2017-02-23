@@ -6,6 +6,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #include "structs.h"
 #include "utils.h"
@@ -75,7 +76,7 @@ char *fread_action(FILE *fl)
 		fgets(buf, MAX_STRING_LENGTH, fl);
 		if (feof(fl))
 		{
-			log("Fread_action - unexpected EOF.");
+			dm_log("Fread_action - unexpected EOF.");
 			exit(0);
 		}
 

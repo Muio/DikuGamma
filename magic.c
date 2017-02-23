@@ -6,6 +6,7 @@
 
 #include <stdio.h>
 #include <assert.h>
+#include <string.h>
 #include "structs.h"
 #include "utils.h"
 #include "comm.h"
@@ -24,8 +25,9 @@ void damage(struct char_data *ch, struct char_data *victim,
             int damage, int weapontype);
 bool saves_spell(struct char_data *ch, sh_int spell);
 void weight_change_object(struct obj_data *obj, int weight);
-char *strdup(char *source);
+/*char *strdup(char *source);*/
 int dice(int number, int size);
+void do_look(struct char_data *ch, char *argument, int cmd);
 
 
 /* Offensive Spells */
@@ -1063,7 +1065,6 @@ void spell_word_of_recall(byte level, struct char_data *ch,
   int loc_nr,location;
   bool found = FALSE;
 
-  void do_look(struct char_data *ch, char *argument, int cmd);
 
 	assert(victim);
 
